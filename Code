@@ -1,0 +1,20 @@
+const int ledPin =  13;
+const int touchPin = 3;
+unsigned long lastEvent = 0;
+boolean ledOn = false;
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(touchPin, INPUT);
+}
+ 
+void loop(){
+  int touchState = digitalRead(touchPin);
+  if (touchState == HIGH) {
+    if (millis() - lastEvent > 50) {
+      ledOn = !ledOn;
+      digitalWrite(ledPin, ledOn ? HIGH : LOW);
+    }
+    lastEvent = millis();
+  }
+}
+
